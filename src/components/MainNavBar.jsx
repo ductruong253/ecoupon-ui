@@ -22,6 +22,7 @@ function MainNavBar() {
               navbarScroll
             >
               <Nav.Link href="/coupons">Coupons</Nav.Link>
+              <Nav.Link href="/games">Games</Nav.Link>
               <Nav.Link href="/inventory">My inventory</Nav.Link>
             </Nav>
             <Form className="d-flex">

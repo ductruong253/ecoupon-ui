@@ -24,30 +24,28 @@ function CouponCard({ coupon }) {
     if (response.status !== 200) {
       alert("Cannot claim this coupon: " + response.statusText);
     } else {
-      alert('Success!')
+      alert("Success!");
       navigate("/coupons");
     }
   }
   return (
-    <>
-      <Card style={{ width: "18rem" }} className={classes.card}>
-        <Card.Img
-          variant="top"
-          src="https://img.giftpop.vn/brand/PHUCLONG/MP2106100003_BASIC_origin.jpg"
-        />
-        <Card.Body>
-          <Card.Title>{coupon.campaignCode}</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">
-            {mapDiscountTypeEnumToString(coupon.type)}
-          </Card.Subtitle>
-          <Card.Text>{`Discount ${coupon.discountPercent}%, maximum ${coupon.maxDiscountValue} ${coupon.unit}`}</Card.Text>
-          <Button variant="secondary">Details</Button>
-          <Button variant="primary" onClick={handleClaimCoupon}>
-            Get this
-          </Button>
-        </Card.Body>
-      </Card>
-    </>
+    <Card style={{ width: "18rem" }} className={classes.card}>
+      <Card.Img
+        variant="top"
+        src="https://img.giftpop.vn/brand/PHUCLONG/MP2106100003_BASIC_origin.jpg"
+      />
+      <Card.Body>
+        <Card.Title>{coupon.campaignCode}</Card.Title>
+        <Card.Subtitle className="mb-2 text-muted">
+          {mapDiscountTypeEnumToString(coupon.type)}
+        </Card.Subtitle>
+        <Card.Text>{`Discount ${coupon.discountPercent}%, maximum ${coupon.maxDiscountValue} ${coupon.unit}`}</Card.Text>
+        <Button variant="secondary">Details</Button>
+        <Button variant="primary" onClick={handleClaimCoupon}>
+          Get this
+        </Button>
+      </Card.Body>
+    </Card>
   );
 }
 
