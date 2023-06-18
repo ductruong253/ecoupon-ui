@@ -1,16 +1,13 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import WheelComponent from "react-wheel-of-prizes";
+import { useLoaderData } from "react-router-dom";
+import { getAuthToken } from "../utils/auth";
+import classes from './GameModal.module.css'
 
-function GameModal({game}) {
-  const segments = [
-    "better luck next time",
-    "won 70",
-    "won 10",
-    "better luck next time",
-    "won 2",
-    "won uber pass",
-  ];
+function GameModal() {
+  const game = useLoaderData();
+  const segments = game.gameContent.map((content) => content.campaignCode);
   const segColors = ["#EE4040", "#F0CF50", "#815CD1", "#3DA5E0", "#34A24F"];
   const onFinished = (winner) => {
     console.log(winner);
@@ -24,10 +21,10 @@ function GameModal({game}) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+          {game.title}
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className={classes.modal_body} >
         <WheelComponent
           segments={segments}
           segColors={segColors}
@@ -50,3 +47,19 @@ function GameModal({game}) {
 }
 
 export default GameModal;
+
+export async function gameDetailLoader({params}) {
+  const id = params.id;
+  const token = getAuthToken();
+  const response = await fetch(`http://localhost:8083/games/id/${id}`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Credentials": true,
+    },
+  });
+  const resData = await response.json();
+  console.log(resData.game);
+  return resData.game;
+}

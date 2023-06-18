@@ -11,7 +11,7 @@ import { loader as logoutLoader } from "./pages/Logout";
 import CouponPage, { couponsLoader } from "./pages/Coupons";
 import InventoryPage, { inventoryLoader } from "./pages/Inventory";
 import GamePage, { gamesLoader } from "./pages/Games";
-import GameModal from "./components/GameModal";
+import GameModal, { gameDetailLoader } from "./components/GameModal";
 
 const router = createBrowserRouter([
   {
@@ -43,10 +43,10 @@ const router = createBrowserRouter([
             element: <Outlet></Outlet>,
             children: [
               {
-                path: "play",
+                path: "play/:id",
                 element: <GameModal />,
                 // action: createUser,
-                // loader: userGroupLoader,
+                loader: gameDetailLoader,
               },
             ],
           },

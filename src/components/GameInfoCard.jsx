@@ -15,7 +15,7 @@ function GameInfoCard({ game }) {
         <Card.Title>{game.title}</Card.Title>{" "}
         <Card.Subtitle className="mb-2 text-muted">Game subtitle</Card.Subtitle>
         <Card.Text>game description</Card.Text>
-        <Button variant="primary" href={`/games/play`}>
+        <Button variant="primary" href={`/games/play/${game.id}`}>
           Play!
         </Button>
       </Card.Body>

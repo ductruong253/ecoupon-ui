@@ -1,5 +1,6 @@
 import GamesList from "../components/GamesList";
 import { useLoaderData, Outlet } from "react-router-dom";
+import { getAuthToken } from "../utils/auth";
 
 function GamePage() {
   const games = useLoaderData();
@@ -13,18 +14,17 @@ function GamePage() {
 
 export default GamePage;
 
-export function gamesLoader() {
-  const games = [
-    {
-      id: 1,
-      title: "game 1",
-      coupons: [
-        { id: 2, code: "COUPON2" },
-        { id: 3, code: "COUPON3" },
-        { id: 4, code: "COUPON4" },
-        { id: 5, code: "COUPON5" },
-      ],
+export async function gamesLoader() {
+  const token = getAuthToken();
+  const response = await fetch("http://localhost:8083/games", {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Credentials": true,
     },
-  ];
-  return games;
+  });
+  const resData = await response.json();
+  console.log(resData.games);
+  return resData.games;
 }
