@@ -1,7 +1,20 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import WheelComponent from "react-wheel-of-prizes";
 
-function GameModal() {
+function GameModal({game}) {
+  const segments = [
+    "better luck next time",
+    "won 70",
+    "won 10",
+    "better luck next time",
+    "won 2",
+    "won uber pass",
+  ];
+  const segColors = ["#EE4040", "#F0CF50", "#815CD1", "#3DA5E0", "#34A24F"];
+  const onFinished = (winner) => {
+    console.log(winner);
+  };
   return (
     <Modal
       show={true}
@@ -15,12 +28,19 @@ function GameModal() {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
+        <WheelComponent
+          segments={segments}
+          segColors={segColors}
+          onFinished={(winner) => onFinished(winner)}
+          primaryColor="black"
+          contrastColor="white"
+          buttonText="Spin"
+          isOnlyOnce={true}
+          size={190}
+          upDuration={500}
+          downDuration={600}
+          fontFamily="Arial"
+        />
       </Modal.Body>
       <Modal.Footer>
         <Button href={`/games`}>Close</Button>
