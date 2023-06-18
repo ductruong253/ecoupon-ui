@@ -8,6 +8,7 @@ import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
 import HomePage from "./pages/Home";
 import { loader as logoutLoader } from "./pages/Logout";
+import CouponPage, { couponsLoader } from "./pages/Coupons";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,11 @@ const router = createBrowserRouter([
         path: "auth",
         element: <AuthenticationPage />,
         action: authAction,
+      },
+      {
+        path: "coupons",
+        element: <CouponPage />,
+        loader: couponsLoader,
       },
       {
         path: "logout",
