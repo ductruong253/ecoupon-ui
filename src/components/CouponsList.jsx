@@ -2,10 +2,15 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import CouponCard from "./CouponCard";
+import classes from "./CouponList.module.css";
 
 function CouponsList({ coupons }) {
-  if (!coupons) {
-    return <>There is no coupon available</>;
+  if (!coupons || coupons.length === 0) {
+    return (
+      <div className={classes.noCoupon}>
+        <h3>There is no coupon available</h3>
+      </div>
+    );
   } else {
     return (
       <Container>
